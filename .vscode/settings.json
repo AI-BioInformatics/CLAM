@@ -1,0 +1,6 @@
+{
+    "files.autoSave": "afterDelay",
+    "terminal.integrated.automationProfile.linux": {
+        "path": "/homes/gbontempo/CLAM/bash.sh"
+    }
+}
