@@ -52,6 +52,12 @@ def compute_from_patches(wsi_object, clam_pred=None, model=None, feature_extract
     patch_size = wsi_kwargs['patch_size']
     
     roi_dataset = Wsi_Region(wsi_object, **wsi_kwargs)
+    ### ONLY FOR SLIDE H144_iOme1_xO_PE_HE TEMPORARY
+    filtered_coords = [coord for coord in roi_dataset.coords if coord[1] > 25000]
+    coords = np.array(filtered_coords)
+    roi_dataset.coords = coords
+    #########################################################################
+
     roi_loader = get_simple_loader(roi_dataset, batch_size=batch_size, num_workers=8)
     print('total number of patches to process: ', len(roi_dataset))
     num_batches = len(roi_loader)

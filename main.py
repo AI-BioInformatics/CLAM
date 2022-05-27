@@ -19,7 +19,9 @@ import torch.nn.functional as F
 
 import pandas as pd
 import numpy as np
+import pathlib
 
+#export PYTHONPATH="${PYTHONPATH}:/homes/mtarquinio/code/CLAM/"
 
 def main(args):
     # create results directory if necessary
@@ -81,7 +83,7 @@ parser.add_argument('--seed', type=int, default=1,
 parser.add_argument('--k', type=int, default=10, help='number of folds (default: 10)')
 parser.add_argument('--k_start', type=int, default=-1, help='start fold (default: -1, last fold)')
 parser.add_argument('--k_end', type=int, default=-1, help='end fold (default: -1, first fold)')
-parser.add_argument('--results_dir', default='./results', help='results directory (default: ./results)')
+parser.add_argument('--results_dir', default='{}/results'.format(str(pathlib.Path(__file__).parent)), help='results directory (default: ./results)')
 parser.add_argument('--split_dir', type=str, default=None, 
                     help='manually specify the set of splits to use, ' 
                     +'instead of infering from the task and label_frac argument (default: None)')
@@ -97,7 +99,7 @@ parser.add_argument('--model_type', type=str, choices=['clam_sb', 'clam_mb', 'mi
 parser.add_argument('--exp_code', type=str, help='experiment code for saving results')
 parser.add_argument('--weighted_sample', action='store_true', default=False, help='enable weighted sampling')
 parser.add_argument('--model_size', type=str, choices=['small', 'big'], default='small', help='size of model, does not affect mil')
-parser.add_argument('--task', type=str, choices=['task_1_tumor_vs_normal',  'task_2_tumor_subtyping'])
+parser.add_argument('--task', type=str, choices=['task_1_tumor_vs_normal',  'task_2_tumor_subtyping', 'task_3_tissue_type', 'task_4_cancer_tissue'])
 ### CLAM specific options
 parser.add_argument('--no_inst_cluster', action='store_true', default=False,
                      help='disable instance-level clustering')
@@ -172,10 +174,30 @@ elif args.task == 'task_2_tumor_subtyping':
                             label_dict = {'subtype_1':0, 'subtype_2':1, 'subtype_3':2},
                             patient_strat= False,
                             ignore=[])
-
     if args.model_type in ['clam_sb', 'clam_mb']:
-        assert args.subtyping 
-        
+        assert args.subtyping
+
+elif args.task == 'task_3_tissue_type':
+    args.n_classes = 3
+    dataset = Generic_MIL_Dataset(csv_path=str(pathlib.Path(__file__).parent) + '/dataset_csv/tissue_type.csv',
+                                  data_dir=os.path.join(args.data_root_dir, 'Data1'),
+                                  shuffle=False,
+                                  seed=args.seed,
+                                  print_info=True,
+                                  label_dict={'omentum': 0, 'adnex': 1, 'peritoneum': 2},
+                                  patient_strat=False,
+                                  ignore=[])
+
+elif args.task == 'task_4_cancer_tissue':
+    args.n_classes = 2
+    dataset = Generic_MIL_Dataset(csv_path=str(pathlib.Path(__file__).parent) + '/dataset_csv/wsi_cancer_labels.csv',
+                                  data_dir=os.path.join(args.data_root_dir, 'cancer_feat'),
+                                  shuffle=False,
+                                  seed=args.seed,
+                                  print_info=True,
+                                  label_dict={'normal_tissue': 0, 'tumor_tissue': 1},
+                                  patient_strat=False,
+                                  ignore=[])
 else:
     raise NotImplementedError
     
@@ -187,7 +209,8 @@ if not os.path.isdir(args.results_dir):
     os.mkdir(args.results_dir)
 
 if args.split_dir is None:
-    args.split_dir = os.path.join('splits', args.task+'_{}'.format(int(args.label_frac*100)))
+    #args.split_dir = os.path.join('splits', args.task+'_{}'.format(int(args.label_frac*100)))
+    args.split_dir = os.path.join(str(pathlib.Path(__file__).parent) + '/splits', args.task + '_{}'.format(int(args.label_frac * 100)))
 else:
     args.split_dir = os.path.join('splits', args.split_dir)
 

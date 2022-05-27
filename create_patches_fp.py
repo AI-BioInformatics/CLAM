@@ -9,6 +9,14 @@ import time
 import argparse
 import pdb
 import pandas as pd
+import yaml
+
+
+try:
+    from yaml import CLoader as Loader
+except:
+    from yaml import Loader
+
 
 def stitching(file_path, wsi_object, downscale = 64):
 	start = time.time()
@@ -53,11 +61,25 @@ def seg_and_patch(source, save_dir, patch_save_dir, mask_save_dir, stitch_save_d
 				  seg = False, save_mask = True, 
 				  stitch= False, 
 				  patch = False, auto_skip=True, process_list = None):
-	
+
+	if os.path.isdir(source):
+		slides = sorted(os.listdir(source))
+		# slides = [slide for slide in slides if os.path.isfile(os.path.join(source, slide))]
+		slides = [slide for slide in slides if os.path.isfile(os.path.join(source, slide)) and slide.endswith(".mrxs")]
+	elif source.endswith(".npy"):
+		slides = np.load(source, allow_pickle=True).tolist()
+		slides[0] = 'H249_iOme1_PE_IA_HE.mrxs'
+		source = '/nas/softechict-nas-1/nbartolini/decider/branch1/features/DATA_DIRECTORY/DATA_DIRECTORY_ome/'
+	else:
+		with open(source, 'r') as stream:
+			try:
+				d = yaml.load(stream, Loader=Loader)
+			except yaml.YAMLError as exc:
+				print(exc)
+
+		slides = [os.path.join(d['root_path'], image['location']) for image in d['images'].values()]
 
 
-	slides = sorted(os.listdir(source))
-	slides = [slide for slide in slides if os.path.isfile(os.path.join(source, slide))]
 	if process_list is None:
 		df = initialize_df(slides, seg_params, filter_params, vis_params, patch_params)
 	

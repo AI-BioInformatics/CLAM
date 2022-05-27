@@ -156,7 +156,7 @@ def train(datasets, cur, args):
             model = MIL_fc_mc(**model_dict)
         else:
             model = MIL_fc(**model_dict)
-    
+
     model.relocate()
     print('Done!')
     print_network(model)
@@ -465,14 +465,24 @@ def validate_clam(cur, epoch, model, loader, n_classes, early_stopping = None, w
         writer.add_scalar('val/error', val_error, epoch)
         writer.add_scalar('val/inst_loss', val_inst_loss, epoch)
 
+    # TODO cambia modo di salvare i dati di validation
+    if not os.path.isfile("/homes/mtarquinio/code/CLAM/results/task_3_tissue_type_CLAM_50_s1/validation_acc.npy"):
+        a = []
+        np.save("/homes/mtarquinio/code/CLAM/results/task_3_tissue_type_CLAM_50_s1/validation_acc.npy", a)
 
+    val_values = np.load("/homes/mtarquinio/code/CLAM/results/task_3_tissue_type_CLAM_50_s1/validation_acc.npy", allow_pickle=True).tolist()
     for i in range(n_classes):
         acc, correct, count = acc_logger.get_summary(i)
         print('class {}: acc {}, correct {}/{}'.format(i, acc, correct, count))
+
+        val_values.append([i, acc, correct, count])
         
         if writer and acc is not None:
             writer.add_scalar('val/class_{}_acc'.format(i), acc, epoch)
-     
+
+    np.save("/homes/mtarquinio/code/CLAM/results/task_3_tissue_type_CLAM_50_s1/validation_acc.npy", val_values)
+
+
 
     if early_stopping:
         assert results_dir

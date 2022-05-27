@@ -660,7 +660,9 @@ class WholeSlideImage(object):
 
         if alpha < 1.0:
             img = self.block_blending(img, vis_level, top_left, bot_right, alpha=alpha, blank_canvas=blank_canvas, block_size=1024)
-        
+
+        ###MATTIA
+        print(f'CHECK {img.shape}')
         img = Image.fromarray(img)
         w, h = img.size
 
