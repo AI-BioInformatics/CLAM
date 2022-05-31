@@ -405,8 +405,9 @@ if __name__ == '__main__':
 																						float(heatmap_args.alpha), int(heatmap_args.vis_level), 
 																						int(heatmap_args.binarize), float(heatmap_args.binary_thresh), heatmap_args.save_ext)
 
-		attention_scores_save_name = f'{slide_id}_attention_scores.npy'
-		np.save(os.path.join(a_slide_save_dir, attention_scores_save_name), scores)
+		# NON SERVE, sono già salvate all'interno del file save_path_full = os.path.join(r_slide_save_dir, '{}_{}_roi_False.h5'.format(slide_id, patch_args.overlap))
+		# attention_scores_save_name = f'{slide_id}_attention_scores.npy'
+		# np.save(os.path.join(a_slide_save_dir, attention_scores_save_name), scores)
 
 		if hq_heatmap:
 			print('THIS SHOULD BE PROBLEMATIC WITH BIG WSI (DECIDER ONES)')
