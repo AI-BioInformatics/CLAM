@@ -1,0 +1,205 @@
+<_PropertyMap {'openslide.level-count': '10', 'openslide.level[
+        0
+    ].downsample': '1', 'openslide.level[
+        0
+    ].height': '221184', 'openslide.level[
+        0
+    ].tile-height': '512', 'openslide.level[
+        0
+    ].tile-width': '512', 'openslide.level[
+        0
+    ].width': '97792', 'openslide.level[
+        1
+    ].downsample': '2', 'openslide.level[
+        1
+    ].height': '110592', 'openslide.level[
+        1
+    ].tile-height': '512', 'openslide.level[
+        1
+    ].tile-width': '512', 'openslide.level[
+        1
+    ].width': '48896', 'openslide.level[
+        2
+    ].downsample': '4', 'openslide.level[
+        2
+    ].height': '55296', 'openslide.level[
+        2
+    ].tile-height': '512', 'openslide.level[
+        2
+    ].tile-width': '512', 'openslide.level[
+        2
+    ].width': '24448', 'openslide.level[
+        3
+    ].downsample': '8', 'openslide.level[
+        3
+    ].height': '27648', 'openslide.level[
+        3
+    ].tile-height': '512', 'openslide.level[
+        3
+    ].tile-width': '512', 'openslide.level[
+        3
+    ].width': '12224', 'openslide.level[
+        4
+    ].downsample': '16', 'openslide.level[
+        4
+    ].height': '13824', 'openslide.level[
+        4
+    ].tile-height': '512', 'openslide.level[
+        4
+    ].tile-width': '512', 'openslide.level[
+        4
+    ].width': '6112', 'openslide.level[
+        5
+    ].downsample': '32', 'openslide.level[
+        5
+    ].height': '6912', 'openslide.level[
+        5
+    ].tile-height': '512', 'openslide.level[
+        5
+    ].tile-width': '512', 'openslide.level[
+        5
+    ].width': '3056', 'openslide.level[
+        6
+    ].downsample': '64', 'openslide.level[
+        6
+    ].height': '3456', 'openslide.level[
+        6
+    ].tile-height': '512', 'openslide.level[
+        6
+    ].tile-width': '512', 'openslide.level[
+        6
+    ].width': '1528', 'openslide.level[
+        7
+    ].downsample': '128', 'openslide.level[
+        7
+    ].height': '1728', 'openslide.level[
+        7
+    ].tile-height': '512', 'openslide.level[
+        7
+    ].tile-width': '512', 'openslide.level[
+        7
+    ].width': '764', 'openslide.level[
+        8
+    ].downsample': '256', 'openslide.level[
+        8
+    ].height': '864', 'openslide.level[
+        8
+    ].tile-height': '512', 'openslide.level[
+        8
+    ].tile-width': '512', 'openslide.level[
+        8
+    ].width': '382', 'openslide.level[
+        9
+    ].downsample': '512', 'openslide.level[
+        9
+    ].height': '432', 'openslide.level[
+        9
+    ].tile-height': '512', 'openslide.level[
+        9
+    ].tile-width': '512', 'openslide.level[
+        9
+    ].width': '191', 'openslide.mpp-x': '0.24309399999999998', 'openslide.mpp-y': '0.24309399999999998', 'openslide.quickhash-1': 'cc2b83f3fd7391491124031fcf20459a478e424e5a87b66aefcaee48f39973a2', 'openslide.vendor': 'philips', 'philips.DICOM_BITS_ALLOCATED': '8', 'philips.DICOM_BITS_STORED': '8', 'philips.DICOM_DERIVATION_DESCRIPTION': 'tiff-useBigTIFF=1-useRgb=0-levels=10003,
+    10002,
+    10000,
+    10001-processing=0-q80-sourceFilename="T11-07929-I1-6"', 'philips.DICOM_HIGH_BIT': '7', 'philips.DICOM_LOSSY_IMAGE_COMPRESSION': '01', 'philips.DICOM_LOSSY_IMAGE_COMPRESSION_METHOD': '"PHILIPS_TIFF_1_0"', 'philips.DICOM_LOSSY_IMAGE_COMPRESSION_RATIO': '"3"', 'philips.DICOM_MANUFACTURER': '3D Histech', 'philips.DICOM_PHOTOMETRIC_INTERPRETATION': 'RGB', 'philips.DICOM_PIXEL_REPRESENTATION': '0', 'philips.DICOM_PIXEL_SPACING': '"0.000243094" "0.000243094"', 'philips.DICOM_PLANAR_CONFIGURATION': '0', 'philips.DICOM_SAMPLES_PER_PIXEL': '3', 'philips.DICOM_SOFTWARE_VERSIONS': '"4.0.3"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        0
+    ].DICOM_PIXEL_SPACING': '"0.000243902" "0.000243902"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        0
+    ].PIIM_DP_PIXEL_DATA_REPRESENTATION_POSITION': '"0" "0" "0"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        0
+    ].PIIM_PIXEL_DATA_REPRESENTATION_COLUMNS': '97792', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        0
+    ].PIIM_PIXEL_DATA_REPRESENTATION_NUMBER': '0', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        0
+    ].PIIM_PIXEL_DATA_REPRESENTATION_ROWS': '221184', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        1
+    ].DICOM_PIXEL_SPACING': '"0.000487805" "0.000487805"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        1
+    ].PIIM_DP_PIXEL_DATA_REPRESENTATION_POSITION': '"0" "0" "0"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        1
+    ].PIIM_PIXEL_DATA_REPRESENTATION_COLUMNS': '49152', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        1
+    ].PIIM_PIXEL_DATA_REPRESENTATION_NUMBER': '1', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        1
+    ].PIIM_PIXEL_DATA_REPRESENTATION_ROWS': '110592', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        2
+    ].DICOM_PIXEL_SPACING': '"0.00097561" "0.00097561"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        2
+    ].PIIM_DP_PIXEL_DATA_REPRESENTATION_POSITION': '"0" "0" "0"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        2
+    ].PIIM_PIXEL_DATA_REPRESENTATION_COLUMNS': '24576', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        2
+    ].PIIM_PIXEL_DATA_REPRESENTATION_NUMBER': '2', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        2
+    ].PIIM_PIXEL_DATA_REPRESENTATION_ROWS': '55296', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        3
+    ].DICOM_PIXEL_SPACING': '"0.00195122" "0.00195122"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        3
+    ].PIIM_DP_PIXEL_DATA_REPRESENTATION_POSITION': '"0" "0" "0"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        3
+    ].PIIM_PIXEL_DATA_REPRESENTATION_COLUMNS': '12288', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        3
+    ].PIIM_PIXEL_DATA_REPRESENTATION_NUMBER': '3', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        3
+    ].PIIM_PIXEL_DATA_REPRESENTATION_ROWS': '27648', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        4
+    ].DICOM_PIXEL_SPACING': '"0.00390244" "0.00390244"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        4
+    ].PIIM_DP_PIXEL_DATA_REPRESENTATION_POSITION': '"0" "0" "0"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        4
+    ].PIIM_PIXEL_DATA_REPRESENTATION_COLUMNS': '6144', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        4
+    ].PIIM_PIXEL_DATA_REPRESENTATION_NUMBER': '4', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        4
+    ].PIIM_PIXEL_DATA_REPRESENTATION_ROWS': '13824', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        5
+    ].DICOM_PIXEL_SPACING': '"0.00780488" "0.00780488"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        5
+    ].PIIM_DP_PIXEL_DATA_REPRESENTATION_POSITION': '"0" "0" "0"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        5
+    ].PIIM_PIXEL_DATA_REPRESENTATION_COLUMNS': '3072', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        5
+    ].PIIM_PIXEL_DATA_REPRESENTATION_NUMBER': '5', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        5
+    ].PIIM_PIXEL_DATA_REPRESENTATION_ROWS': '7168', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        6
+    ].DICOM_PIXEL_SPACING': '"0.0156098" "0.0156098"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        6
+    ].PIIM_DP_PIXEL_DATA_REPRESENTATION_POSITION': '"0" "0" "0"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        6
+    ].PIIM_PIXEL_DATA_REPRESENTATION_COLUMNS': '1536', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        6
+    ].PIIM_PIXEL_DATA_REPRESENTATION_NUMBER': '6', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        6
+    ].PIIM_PIXEL_DATA_REPRESENTATION_ROWS': '3584', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        7
+    ].DICOM_PIXEL_SPACING': '"0.0312195" "0.0312195"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        7
+    ].PIIM_DP_PIXEL_DATA_REPRESENTATION_POSITION': '"0" "0" "0"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        7
+    ].PIIM_PIXEL_DATA_REPRESENTATION_COLUMNS': '1024', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        7
+    ].PIIM_PIXEL_DATA_REPRESENTATION_NUMBER': '7', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        7
+    ].PIIM_PIXEL_DATA_REPRESENTATION_ROWS': '2048', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        8
+    ].DICOM_PIXEL_SPACING': '"0.062439" "0.062439"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        8
+    ].PIIM_DP_PIXEL_DATA_REPRESENTATION_POSITION': '"0" "0" "0"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        8
+    ].PIIM_PIXEL_DATA_REPRESENTATION_COLUMNS': '512', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        8
+    ].PIIM_PIXEL_DATA_REPRESENTATION_NUMBER': '8', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        8
+    ].PIIM_PIXEL_DATA_REPRESENTATION_ROWS': '1024', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        9
+    ].DICOM_PIXEL_SPACING': '"0.124878" "0.124878"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        9
+    ].PIIM_DP_PIXEL_DATA_REPRESENTATION_POSITION': '"0" "0" "0"', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        9
+    ].PIIM_PIXEL_DATA_REPRESENTATION_COLUMNS': '512', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        9
+    ].PIIM_PIXEL_DATA_REPRESENTATION_NUMBER': '9', 'philips.PIIM_PIXEL_DATA_REPRESENTATION_SEQUENCE[
+        9
+    ].PIIM_PIXEL_DATA_REPRESENTATION_ROWS': '512', 'philips.PIM_DP_IMAGE_COLUMNS': '97792', 'philips.PIM_DP_IMAGE_ROWS': '221184', 'philips.PIM_DP_IMAGE_TYPE': 'WSI', 'philips.PIM_DP_SOURCE_FILE': '%FILENAME%', 'philips.PIM_DP_UFS_INTERFACE_VERSION': '3.0', 'philips.UFS_IMAGE_PIXEL_TRANSFORMATION_METHOD': '0', 'tiff.ResolutionUnit': 'inch', 'tiff.Software': 'Philips DP v1.0'
+}>
