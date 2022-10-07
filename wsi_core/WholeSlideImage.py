@@ -16,11 +16,12 @@ from wsi_core.wsi_utils import savePatchIter_bag_hdf5, initialize_hdf5_bag, coor
 import itertools
 from wsi_core.util_classes import isInContourV1, isInContourV2, isInContourV3_Easy, isInContourV3_Hard, Contour_Checking_fn
 from utils.file_utils import load_pkl, save_pkl
-
+from openslide.deepzoom import DeepZoomGenerator
+from openslide import ImageSlide
 Image.MAX_IMAGE_PIXELS = 933120000
 
 class WholeSlideImage(object):
-    def __init__(self, path):
+    def __init__(self, path,tile_size,overlap,limit_bounds):
 
         """
         Args:
@@ -30,11 +31,14 @@ class WholeSlideImage(object):
 #         self.name = ".".join(path.split("/")[-1].split('.')[:-1])
         self.name = os.path.splitext(os.path.basename(path))[0]
         self.wsi = openslide.open_slide(path)
+        #self.wsiv2= ImageSlide(self.wsi)
+        self.dz= DeepZoomGenerator(self.wsi,tile_size,overlap,True)
         self.level_downsamples = self._assertLevelDownsamples()
         self.level_dim = self.wsi.level_dimensions
         self.contours_tissue = None
         self.contours_tumor = None
         self.hdf5_file = None
+
 
     def getOpenSlide(self):
         return self.wsi
@@ -359,8 +363,13 @@ class WholeSlideImage(object):
 
     def _assertLevelDownsamples(self):
         level_downsamples = []
+        dz_leveldimensions=self.dz.level_dimensions[::-1]
+        higher_level=dz_leveldimensions[0]
+        new_level_downsamples=[(higher_level[0]/float(level[0]),higher_level[1]/float(level[1])) for level in dz_leveldimensions]
+        self.level_dim_patch=dz_leveldimensions
         dim_0 = self.wsi.level_dimensions[0]
 
+        self.level_downsamples_patch=new_level_downsamples
         for downsample, dim in zip(self.wsi.level_downsamples, self.wsi.level_dimensions):
             estimated_downsample = (dim_0[0]/float(dim[0]), dim_0[1]/float(dim[1]))
             level_downsamples.append(estimated_downsample) if estimated_downsample != (downsample, downsample) else level_downsamples.append((downsample, downsample))
@@ -394,10 +403,10 @@ class WholeSlideImage(object):
         contour_fn='four_pt', use_padding=True, top_left=None, bot_right=None):
         start_x, start_y, w, h = cv2.boundingRect(cont) if cont is not None else (0, 0, self.level_dim[patch_level][0], self.level_dim[patch_level][1])
 
-        patch_downsample = (int(self.level_downsamples[patch_level][0]), int(self.level_downsamples[patch_level][1]))
+        patch_downsample = (int(self.level_downsamples_patch[patch_level][0]), int(self.level_downsamples_patch[patch_level][1]))
         ref_patch_size = (patch_size*patch_downsample[0], patch_size*patch_downsample[1])
 
-        img_w, img_h = self.level_dim[0]
+        img_w, img_h = self.level_dim_patch[0]
         if use_padding:
             stop_y = start_y+h
             stop_x = start_x+w
@@ -464,13 +473,17 @@ class WholeSlideImage(object):
 
             attr = {'patch_size' :            patch_size, # To be considered...
                     'patch_level' :           patch_level,
-                    'downsample':             self.level_downsamples[patch_level],
+                    'downsample':             self.level_downsamples_patch[patch_level],
                     'downsampled_level_dim' : tuple(np.array(self.level_dim[patch_level])),
                     'level_dim':              self.level_dim[patch_level],
                     'name':                   self.name,
                     'save_path':              save_path}
 
             attr_dict = { 'coords' : attr}
+            base="/mnt/beegfs/work/H2020DeciderFicarra/gbontempo/patches/testclamvsclamnew/clamnew"
+            for coord in results:
+                img=self.dz.get_tile(self.dz.level_count-1-patch_level,(coord[0]/(patch_size*patch_downsample[0]),coord[1]/(patch_size*patch_downsample[0]))).convert('RGB')
+                img.save(os.path.join(base,str(coord[0])+"_"+str(coord[1])+".jpg"))
             return asset_dict, attr_dict
 
         else:

@@ -58,7 +58,7 @@ def seg_and_patch(source, save_dir, patch_save_dir, mask_save_dir, stitch_save_d
     slides = sorted(os.listdir(source))
     #slides = glob.glob("/mnt/beegfs/work/H2020DeciderFicarra/gbontempo/datasets/Ovarian_Bevacizumab_Response/*/*svs")
     slides = [slide for slide in slides if (os.path.isfile(
-        os.path.join(source, slide)) and slide.endswith(".tif"))]
+        os.path.join(source, slide)) and slide.endswith(".svs"))]
     if process_list is None:
         df = initialize_df(slides, seg_params, filter_params,
                            vis_params, patch_params)
@@ -84,7 +84,7 @@ def seg_and_patch(source, save_dir, patch_save_dir, mask_save_dir, stitch_save_d
     seg_times = 0.
     patch_times = 0.
     stitch_times = 0.
-    for i in range(4):
+    for i in range(total):
         try:
             df.to_csv(os.path.join(save_dir, 'process_list_autogen.csv'), index=False)
             idx = process_stack.index[i]
@@ -103,17 +103,7 @@ def seg_and_patch(source, save_dir, patch_save_dir, mask_save_dir, stitch_save_d
 
             # Inialize WSI
             full_path = os.path.join(source, slide)
-            WSI_object = WholeSlideImage("/mnt/beegfs/work/H2020DeciderFicarra/decider_interval/H039/Adn/22-04-2021/H039_iAdnL_PE_IIA_HE/2021/22-04-2021/H039_iAdnL_PE_IIA_HE.mrxs")
-            if "TCGA-53-7624-01Z-00-DX1" in full_path:
-                    print("found")
-            else:
-                print("found")
-            if float(WSI_object.wsi.properties.get(openslide.PROPERTY_NAME_OBJECTIVE_POWER))==20:
-                print("20")
-                continue
-            else:
-                print("40")
-
+            WSI_object = WholeSlideImage("/mnt/beegfs/work/H2020DeciderFicarra/gbontempo/datasets/LUNG/TCGA-05-4244-01Z-00-DX1.d4ff32cd-38cf-40ea-8213-45c2b100ac01.svs",patch_size,step_size-patch_size,True)
 
             if use_default_params:
                 current_vis_params = vis_params.copy()
@@ -246,7 +236,7 @@ def seg_and_patch(source, save_dir, patch_save_dir, mask_save_dir, stitch_save_d
 
 
 parser = argparse.ArgumentParser(description='seg and patch')
-parser.add_argument('--source', type=str, default="/mnt/beegfs/work/H2020DeciderFicarra/gbontempo/datasets/camelyon16/training/normal",
+parser.add_argument('--source', type=str, default="/mnt/beegfs/work/H2020DeciderFicarra/gbontempo/datasets/LUNG",
                     help='path to folder containing raw wsi image files')
 parser.add_argument('--step_size', type=int, default=256,
                     help='step_size')
@@ -256,7 +246,7 @@ parser.add_argument('--patch', default=True, action='store_true')
 parser.add_argument('--seg', default=True, action='store_true')
 parser.add_argument('--stitch', default=True, action='store_true')
 parser.add_argument('--no_auto_skip', default=True, action='store_false')
-parser.add_argument('--save_dir', type=str, default="/mnt/beegfs/work/H2020DeciderFicarra/gbontempo/patches/lung0clampro",
+parser.add_argument('--save_dir', type=str, default="/mnt/beegfs/work/H2020DeciderFicarra/gbontempo/patches/lung0clampro1",
                     help='directory to save processed data')
 parser.add_argument('--preset', default=None, type=str,
                     help='predefined profile of default segmentation and filter parameters (.csv)')
