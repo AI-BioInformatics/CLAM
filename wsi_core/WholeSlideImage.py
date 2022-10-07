@@ -16,11 +16,12 @@ from wsi_core.wsi_utils import savePatchIter_bag_hdf5, initialize_hdf5_bag, coor
 import itertools
 from wsi_core.util_classes import isInContourV1, isInContourV2, isInContourV3_Easy, isInContourV3_Hard, Contour_Checking_fn
 from utils.file_utils import load_pkl, save_pkl
-
+from openslide.deepzoom import DeepZoomGenerator
+from openslide import ImageSlide
 Image.MAX_IMAGE_PIXELS = 933120000
 
 class WholeSlideImage(object):
-    def __init__(self, path):
+    def __init__(self, path,tile_size,overlap,limit_bounds):
 
         """
         Args:
@@ -30,8 +31,10 @@ class WholeSlideImage(object):
 #         self.name = ".".join(path.split("/")[-1].split('.')[:-1])
         self.name = os.path.splitext(os.path.basename(path))[0]
         self.wsi = openslide.open_slide(path)
+        #self.wsiv2= ImageSlide(self.wsi)
+        self.dz= DeepZoomGenerator(self.wsi,tile_size,overlap,True)
         self.level_downsamples = self._assertLevelDownsamples()
-        self.level_dim = self.wsi.level_dimensions
+        #self.level_dim = self.wsi.level_dimensions
         self.contours_tissue = None
         self.contours_tumor = None
         self.hdf5_file = None
@@ -140,8 +143,8 @@ class WholeSlideImage(object):
                 hole_contours.append(filtered_holes)
 
             return foreground_contours, hole_contours
-
-        img = np.array(self.wsi.read_region((0,0), seg_level, self.level_dim[seg_level]))
+        img=np.array(self.dz.get_tile(self.dz.level_count-seg_level,(0,0)))
+        #img = np.array(self.wsi.read_region((0,0), seg_level, self.level_dim[seg_level]))
         img_hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)  # Convert to HSV space
         img_med = cv2.medianBlur(img_hsv[:,:,1], mthresh)  # Apply median blurring
 
@@ -195,8 +198,8 @@ class WholeSlideImage(object):
         else:
             top_left = (0,0)
             region_size = self.level_dim[vis_level]
-
-        img = np.array(self.wsi.read_region(top_left, vis_level, region_size).convert("RGB"))
+        img=np.array(self.dz.get_tile(self.dz.level_count-vis_level,top_left))
+        #img = np.array(self.wsi.read_region(top_left, vis_level, region_size).convert("RGB"))
 
         if not view_slide_only:
             offset = tuple(-(np.array(top_left) * scale).astype(int))
@@ -359,13 +362,16 @@ class WholeSlideImage(object):
 
     def _assertLevelDownsamples(self):
         level_downsamples = []
+        dz_leveldimensions=self.dz.level_dimensions[::-1]
+        higher_level=dz_leveldimensions[0]
+        new_level_downsamples=[(higher_level[0]/float(level[0]),higher_level[1]/float(level[1])) for level in dz_leveldimensions]
+        self.level_dim=dz_leveldimensions
         dim_0 = self.wsi.level_dimensions[0]
 
-        for downsample, dim in zip(self.wsi.level_downsamples, self.wsi.level_dimensions):
-            estimated_downsample = (dim_0[0]/float(dim[0]), dim_0[1]/float(dim[1]))
-            level_downsamples.append(estimated_downsample) if estimated_downsample != (downsample, downsample) else level_downsamples.append((downsample, downsample))
+        #for downsample, dim in zip(new_level_downsamples, dz_leveldimensions):
+        #    level_downsamples.append((downsample, downsample))
 
-        return level_downsamples
+        return new_level_downsamples
 
     def process_contours(self, save_path, patch_level=0, patch_size=256, step_size=256, **kwargs):
         save_path_hdf5 = os.path.join(save_path, str(self.name) + '.h5')
