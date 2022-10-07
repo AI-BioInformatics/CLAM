@@ -89,7 +89,7 @@ def save_patches(file_path, output_path, wsi,target_patch_size,
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Feature Extraction')
-    parser.add_argument('--output_dir', type=str,default="/mnt/beegfs/work/H2020DeciderFicarra/gbontempo/patches/lung0clam")
+    parser.add_argument('--output_dir', type=str,default="/mnt/beegfs/work/H2020DeciderFicarra/gbontempo/patches/lung0clampro")
     parser.add_argument('--source_dir', type=str, default="/mnt/beegfs/work/H2020DeciderFicarra/gbontempo/datasets/LUNG")
     parser.add_argument('--slide_ext', type=str, default='.svs')
     parser.add_argument('--csv_path', type=str, default=None)
@@ -113,7 +113,7 @@ if __name__ == '__main__':
 
 
     #jobs = executor.map_array(process,candidates,parameters)
-    process(34,args)
+    process(0,args)
 
 
 

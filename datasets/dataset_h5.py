@@ -11,7 +11,7 @@ import pickle
 from torch.utils.data import Dataset, DataLoader, sampler
 from torchvision import transforms, utils, models
 import torch.nn.functional as F
-
+from openslide.deepzoom import DeepZoomGenerator
 from PIL import Image
 import h5py
 
@@ -111,6 +111,7 @@ class Whole_Slide_Bag_FP(Dataset):
 		"""
 		self.pretrained=pretrained
 		self.wsi = wsi
+		self.dz= DeepZoomGenerator(self.wsi,256,0,True)
 		if not custom_transforms:
 			self.roi_transforms = eval_transforms(pretrained=pretrained)
 		else:
@@ -148,8 +149,8 @@ class Whole_Slide_Bag_FP(Dataset):
 	def __getitem__(self, idx):
 		with h5py.File(self.file_path,'r') as hdf5_file:
 			coord = hdf5_file['coords'][idx]
-		img = self.wsi.read_region(coord, self.patch_level, (self.patch_size, self.patch_size)).convert('RGB')
-
+		#img = self.wsi.read_region(coord, self.patch_level, (self.patch_size, self.patch_size)).convert('RGB')
+		img= self.dz.get_tile(self.dz.level_count-self.patch_level-1,coord)
 		if self.target_patch_size is not None:
 			img = img.resize(self.target_patch_size)
 		img = self.roi_transforms(img).unsqueeze(0)
